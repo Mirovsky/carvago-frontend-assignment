@@ -24,7 +24,7 @@ export const parseNewTodo = (todo: Record<string, unknown>, req: Request, res: R
 const todoSchema = object({
   id: string().required(),
   title: string().required(),
-  description: string().required(),
+  description: string().optional(),
   createdAt: string().required(),
   completed: boolean().required(),
   userId: string().required(),

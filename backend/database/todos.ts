@@ -3,7 +3,7 @@ import Datastore from 'nedb';
 export type Todo = {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   createdAt: string;
   completed: boolean;
   userId: string;

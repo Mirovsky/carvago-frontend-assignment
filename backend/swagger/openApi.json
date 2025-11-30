@@ -107,6 +107,37 @@
         }
       }
     },
+    "/api/user/me": {
+      "get": {
+        "summary": "Get current user",
+        "description": "Get the currently authenticated user's information.",
+        "operationId": "getCurrentUser",
+        "tags": ["Users"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
     "/api/todo/list": {
       "get": {
         "summary": "Get the list of todos",
@@ -123,10 +154,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TodoResponse"
-                  }
+                  "type": "object",
+                  "properties": {
+                    "todos": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TodoResponse"
+                      }
+                    }
+                  },
+                  "required": ["todos"]
                 }
               }
             }
@@ -354,7 +391,7 @@
             "example": "ToDo description"
           }
         },
-        "required": ["title", "description"]
+        "required": ["title"]
       },
       "TodoResponse": {
         "type": "object",
@@ -383,7 +420,7 @@
             "example": "ToDo description"
           }
         },
-        "required": ["id", "title", "userId", "completed", "createdAt", "description"]
+        "required": ["id", "title", "userId", "completed", "createdAt"]
       },
       "User": {
         "type": "object",
@@ -398,6 +435,24 @@
           }
         },
         "required": ["username", "password"]
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "username": {
+            "type": "string",
+            "example": "username1"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["id", "username", "createdAt"]
       }
     }
   }

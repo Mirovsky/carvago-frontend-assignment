@@ -1,7 +1,7 @@
 # Quick Overview
 
 - This repository is built on [Create React App](https://github.com/facebook/create-react-app) with TypeScript configuration
-- [Chakra UI](https://chakra-ui.com/) is installed as UI framework
+- [Chakra Theme](https://chakra-ui.com/) is set up with all the colors and sizes
 - For unit testing, [Jest](https://jestjs.io/) is already installed
 - You will use our prettier, eslint, and typescript config for static testing <br/> `npm run eslint && npm run prettify && npm run typecheck`
 
@@ -27,11 +27,13 @@ You can use the `Chakra UI` design system with our style theme. This means that 
 
 The assignment will not be completely detailed, i.e. you will have to think about the details. How you handle it is up to you and we will grade you accordingly. You will be given a rough description, and figma specification.
 
-| Title                  | 1.                                                                                                                                    | 2.                                                                                                                        | 3.                                                                           | 4.                                                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **Requirements**       | Chakra UI                                                                                                                             | Error handling                                                                                                            | Responsive design (let's focus on main devices, Desktop, Tablet, and Mobile) | Write utility function to get formatted current date and test with jest                   |
-| **What we appreciate** | Statefull fetching                                                                                                                                                                                               | Basic component system (Button, Checkbox, Card, etc.)                        | Task feedback from your side, feel free to add comments with questions/explanations/notes |
-| **Where we relieve**   | Don't have time to waste with fancy design or tranlations. Write a simple proof of concept and focus on the logical part of your code | Performance (let's focus on delivering a working project, we can discuss potential improvements in our online interview ) |                                                                              |                                                                                           |
+| Title                  | 1.                                                                                                                                    | 2.                                                                                                                          | 3.                                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Requirements**       | Statefull fetching                                                                                                                    | Error handling                                                                                                              | Write utility function to get formatted current date and test with jest                                                                |
+| **What we appreciate** | Responsive design _(Desktop, Tablet, and Mobile)_                                                                                     | Basic component system _(Button, Checkbox, Card, etc.)_                                                                     | Chakra UI / tailwind setup _(Chakra is already set up in the project, but feel free to ditch or overwrite the current implementation)_ |
+| **Where we relieve**   | Don't have time to waste with fancy design or tranlations. Write a simple proof of concept and focus on the logical part of your code | Performance _(let's focus on delivering a working project, we can discuss potential improvements in our online interview )_ |                                                                                                                                        |
+
+**Feel free to update update the readme.md with any notes, feedback or comments**
 
 ### Description
 
