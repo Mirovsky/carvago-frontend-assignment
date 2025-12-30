@@ -3,7 +3,6 @@ import { Navigate, useLocation } from 'react-router'
 
 import { useLoginMutation } from '../queries/login'
 import { useMeQuery } from '../queries/me'
-import { login } from '../api/auth'
 
 export default function LoginPage() {
     const loginMutation = useLoginMutation()

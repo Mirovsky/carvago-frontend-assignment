@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
                 element: <AddTodoPage />
             },
             {
-                path: '/todo/:id/edit',
+                path: '/todo/:id',
                 element: <EditTodoPage />
             }
         ]
