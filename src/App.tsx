@@ -17,9 +17,7 @@ function App() {
         <meta name="description" content={t('app.description')} />
       </Helmet>
 
-      <BrowserRouter>
-        <TodoApp />
-      </BrowserRouter>
+      <TodoApp />
     </>
   );
 }

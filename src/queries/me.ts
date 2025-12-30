@@ -4,13 +4,13 @@ import { API_URL } from '../api/auth'
 
 export type Me = { id: string, username: string, createdAt: string }
 
-async function fetchMe() {
+export async function fetchMe() {
     const res = await apiFetch(`${API_URL}/user/me`)
     if (res.status === 401) {
         return null
     }
     if (!res.ok) {
-        throw new Error('Failed to fetch user data')
+        throw new Error(`Failed to load /me (${res.status})`);
     }
 
     return (await res.json()) as Me

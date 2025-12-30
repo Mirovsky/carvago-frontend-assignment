@@ -5,7 +5,7 @@ import { useLoginMutation } from '../queries/login'
 import { useMeQuery } from '../queries/me'
 import { login } from '../api/auth'
 
-export default function Login() {
+export default function LoginPage() {
     const loginMutation = useLoginMutation()
     const { data: me, isLoading } = useMeQuery()
     const location = useLocation()
