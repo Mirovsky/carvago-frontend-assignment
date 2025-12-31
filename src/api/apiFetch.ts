@@ -15,7 +15,7 @@ export async function refreshOnce(): Promise<boolean> {
     return refreshInProgress;
 }
 
-export async function apiFetch(input: RequestInfo, init: RequestInit = {}) {
+export async function authorizedFetch(input: RequestInfo, init: RequestInit = {}) {
     const headers = new Headers(init.headers);
     
     const t = tokenStore.get();

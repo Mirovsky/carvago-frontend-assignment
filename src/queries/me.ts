@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { apiFetch } from '../api/apiFetch'
+import { authorizedFetch } from '../api/apiFetch'
 import { API_URL } from '../api/auth'
 
 export type Me = { id: string, username: string, createdAt: string }
 
 export async function fetchMe() {
-    const res = await apiFetch(`${API_URL}/user/me`)
+    const res = await authorizedFetch(`${API_URL}/user/me`)
     if (res.status === 401) {
         return null
     }

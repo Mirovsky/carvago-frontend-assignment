@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
 
-import { queryClient } from "./queryClient";
+import { queryClient } from "../utils/queryClient";
 import { fetchMe } from "../queries/me";
 
 export async function requireAuthLoader({ request }: { request: Request }) {

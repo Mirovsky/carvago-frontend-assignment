@@ -1,8 +1,14 @@
 import { createBrowserRouter, Navigate } from "react-router"
 
-import { requireAuthLoader } from "./requireAuthLoader"
+import { requireAuthLoader } from "../loaders/requireAuthLoader"
+import { todoLoader } from "../loaders/todoLoader"
+
+import { newTodoAction } from "../actions/newTodoAction"
+import { editTodoAction } from "../actions/editTodoAction"
+
 import UnauthorizedLayout from "../components/layouts/UnauthorizedLayout"
 import AuthorizedLayout from "../components/layouts/AuthorizedLayout"
+
 import IndexPage from "../pages/IndexPage"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
@@ -21,6 +27,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <RegisterPage />
+            },
+            {
+                path: '/error',
+                element: <ErrorPage />
             }
         ]
     },
@@ -34,10 +44,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/todo/new',
+                action: newTodoAction,
                 element: <AddTodoPage />
             },
             {
                 path: '/todo/:id',
+                loader: todoLoader,
+                action: editTodoAction,
                 element: <EditTodoPage />
             }
         ]

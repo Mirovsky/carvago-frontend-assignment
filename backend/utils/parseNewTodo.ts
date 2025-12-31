@@ -8,10 +8,11 @@ export const parseNewTodo = (todo: Record<string, unknown>, req: Request, res: R
   try {
     const {data} = getAccessTokenDataFromRequest(req, res);
     const newTodo = {
-      ...todo,
-      id: randomUUID(),
+      id: todo['id'] ?? randomUUID(),
       userId: data.userId,
-      completed: false,
+      completed: todo['completed'] ?? false,
+      title: todo['title'] as string,
+      description: todo['description'] as string | null,
       createdAt: new Date().toISOString(),
     };
 

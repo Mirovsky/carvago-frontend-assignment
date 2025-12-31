@@ -5,10 +5,6 @@ let tokens: Tokens = emptyTokens
 
 export const tokenStore = {
     get: () => tokens,
-    set: (t: Tokens | null) => {
-        tokens = t ?? emptyTokens
-
-        console.log(tokens)
-    },
+    set: (t: Tokens | null) => tokens = t ?? emptyTokens,
     clear: () => { tokens = emptyTokens },
 }
