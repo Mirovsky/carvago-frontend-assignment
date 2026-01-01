@@ -1,79 +1,38 @@
-import {useMemo, useState} from 'react';
-
-import {useTodosQuery, useRemoveTodoMutation, useCompleteTodoMutation} from '../queries/todos';
+import {Todo} from '../queries/todos';
 import TodoItem from './TodoItem';
-import {set} from 'ramda';
+import TodoEmpty from './TodoEmpty';
 
-export default function TodoList() {
-  const {data: todos, isLoading, isError, error} = useTodosQuery();
+type TodoListProps = {
+  listName: string;
+  todos: Todo[];
+  pending: Set<string>;
+  completeHandler: (id: string, completed: boolean) => void;
+  removeHandler: (id: string) => void;
+};
 
-  const completeTodoMutation = useCompleteTodoMutation();
-
-  const removeTodoMutation = useRemoveTodoMutation();
-  const [pendingIds, setPendingIds] = useState<Set<string>>(new Set<string>());
-
-  const completed = useMemo(() => todos?.todos.filter((t) => t.completed) ?? [], [todos]);
-  const pending = useMemo(() => todos?.todos.filter((t) => !t.completed) ?? [], [todos]);
-
-  const onComplete = (id: string, completed: boolean) => {
-    completeTodoMutation.mutate({id, completed});
-  };
-
-  const onRemove = (id: string) => {
-    setPendingIds(new Set(pendingIds).add(id));
-
-    removeTodoMutation.remove(id, {
-      onSettled: () => {
-        setPendingIds((prev) => {
-          const newSet = new Set(prev);
-          newSet.delete(id);
-          return newSet;
-        });
-      },
-    });
-  };
-
-  if (isLoading) {
-    return <div>Loading todos..</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading todos: {(error as Error).message}</div>;
-  }
-
-  if (todos?.todos.length === 0) {
-    return <div>No todos found. Add your first todo!</div>;
-  }
-
+export default function TodoList({
+  listName,
+  todos,
+  pending,
+  completeHandler,
+  removeHandler,
+}: TodoListProps) {
   return (
-    <div>
-      <h2>Pending Todos</h2>
-      <div>
-        {pending.map((todo) => (
+    <section>
+      <h2>{listName}</h2>
+
+      {todos.length === 0 && <TodoEmpty />}
+
+      {todos.length > 0 &&
+        todos.map((t) => (
           <TodoItem
-            key={todo.id}
-            todo={todo}
-            isPending={pendingIds.has(todo.id)}
-            completeHandler={onComplete}
-            removeHandler={onRemove}
+            key={t.id}
+            todo={t}
+            isPending={pending.has(t.id)}
+            completeHandler={completeHandler}
+            removeHandler={removeHandler}
           />
         ))}
-      </div>
-
-      <hr />
-
-      <h2>Completed Todos</h2>
-      <div>
-        {completed.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            isPending={pendingIds.has(todo.id)}
-            completeHandler={onComplete}
-            removeHandler={onRemove}
-          />
-        ))}
-      </div>
-    </div>
+    </section>
   );
 }

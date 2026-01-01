@@ -1,11 +1,11 @@
 import TodoListHeader from '../components/TodoListHeader';
-import TodoList from '../components/TodoList';
+import TodosList from '../components/TodosList';
 
 export default function IndexPage() {
   return (
     <div>
       <TodoListHeader />
-      <TodoList />
+      <TodosList />
     </div>
   );
 }

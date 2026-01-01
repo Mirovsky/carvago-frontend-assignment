@@ -1,11 +1,12 @@
 import {Outlet} from 'react-router';
+import UnauthorizedHeader from '../UnauthorizedHeader';
 
 export default function UnauthorizedLayout() {
   return (
-    <div>
-      <main>
-        <Outlet />
-      </main>
-    </div>
+    <main className="container mx-auto">
+      <UnauthorizedHeader />
+
+      <Outlet />
+    </main>
   );
 }
