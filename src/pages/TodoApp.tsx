@@ -1,7 +1,5 @@
-import { AppProviders } from '../utils/AppProviders'
+import {AppProviders} from '../utils/AppProviders';
 
 export default function TodoApp() {
-  return (
-    <AppProviders />
-  )
+  return <AppProviders />;
 }

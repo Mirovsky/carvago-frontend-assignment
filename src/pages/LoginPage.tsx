@@ -1,66 +1,62 @@
-import React from 'react'
-import { Navigate, useLocation } from 'react-router'
+import React from 'react';
+import {Navigate, useLocation} from 'react-router';
 
-import { useLoginMutation } from '../queries/login'
-import { useMeQuery } from '../queries/me'
+import {useLoginMutation} from '../queries/login';
+import {useMeQuery} from '../queries/me';
 
 export default function LoginPage() {
-    const loginMutation = useLoginMutation()
-    const { data: me, isLoading } = useMeQuery()
-    const location = useLocation()
-    
-    const [username, setUsername] = React.useState('')
-    const [password, setPassword] = React.useState('')
+  const loginMutation = useLoginMutation();
+  const {data: me, isLoading} = useMeQuery();
+  const location = useLocation();
 
-    const params = new URLSearchParams(location.search)
-    const returnTo = params.get('returnTo') || '/'
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
-    if (isLoading || me !== null) {
-        return <Navigate to={returnTo} replace />
-    }
+  const params = new URLSearchParams(location.search);
+  const returnTo = params.get('returnTo') || '/';
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
+  if (isLoading || me !== null) {
+    return <Navigate to={returnTo} replace />;
+  }
 
-        loginMutation.mutate({ username, password })
-    }
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    return (
-        <form onSubmit={onSubmit}>
-            <h1>Login</h1>
-            <label>
-                Username
+    loginMutation.mutate({username, password});
+  };
 
-                <input
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                    onChange={(e) => setUsername(e.target.value)}
-                    disabled={loginMutation.isPending}
-                    required
-                />
-            </label>
-            <label>
-                Password
+  return (
+    <form onSubmit={onSubmit}>
+      <h1>Login</h1>
+      <label>
+        Username
+        <input
+          id="username"
+          type="text"
+          placeholder="Username"
+          onChange={(e) => setUsername(e.target.value)}
+          disabled={loginMutation.isPending}
+          required
+        />
+      </label>
+      <label>
+        Password
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          disabled={loginMutation.isPending}
+          required
+        />
+      </label>
+      <button type="submit" disabled={loginMutation.isPending}>
+        {loginMutation.isPending ? 'Signing in...' : 'Sign In'}
+      </button>
 
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    disabled={loginMutation.isPending}
-                    required
-                />
-            </label>
-            <button type="submit" disabled={loginMutation.isPending}>
-                {loginMutation.isPending ? 'Signing in...' : 'Sign In'}
-            </button>
-
-            {loginMutation.isError && (
-                <div style={{ color: 'red' }}>
-                    {(loginMutation.error as Error).message}
-                </div>
-            )}
-        </form>
-    )
+      {loginMutation.isError && (
+        <div style={{color: 'red'}}>{(loginMutation.error as Error).message}</div>
+      )}
+    </form>
+  );
 }

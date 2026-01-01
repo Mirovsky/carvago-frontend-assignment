@@ -1,6 +1,6 @@
 import {Helmet} from 'react-helmet-async';
 import {useTranslation} from 'react-i18next';
-import {BrowserRouter} from 'react-router'
+import {BrowserRouter} from 'react-router';
 
 import TodoApp from './pages/TodoApp';
 
