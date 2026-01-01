@@ -35,16 +35,11 @@ export function useTodosQuery() {
 export function useCompleteTodoMutation() {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
+  return useMutation({
     mutationFn: async ({id, completed}: {id: string; completed: boolean}) => {
-      const res = await authorizedFetch(`${API_URL}/todo/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          completed: completed,
-        }),
+      const url = `${API_URL}/todo/${id}/${completed ? 'complete' : 'incomplete'}`;
+      const res = await authorizedFetch(url, {
+        method: 'POST',
       });
 
       if (!res.ok) {
@@ -54,13 +49,11 @@ export function useCompleteTodoMutation() {
       return {id, completed};
     },
     onSuccess: async ({id, completed}) => {
-      queryClient.setQueryData<Todos | undefined>(['todos'], (old) => {
-        if (old) {
-          const index = old.todos.findIndex((t) => t.id === id);
-        }
+      queryClient.setQueryData<Todos | undefined>(['todos'], (old) =>
+        old ? {todos: old.todos.map((t) => (t.id === id ? {...t, completed} : t))} : old
+      );
 
-        return old;
-      });
+      await queryClient.invalidateQueries({queryKey: ['todos']});
     },
   });
 }

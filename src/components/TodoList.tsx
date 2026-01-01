@@ -1,11 +1,13 @@
 import {useMemo, useState} from 'react';
 
-import {useTodosQuery, useRemoveTodoMutation} from '../queries/todos';
+import {useTodosQuery, useRemoveTodoMutation, useCompleteTodoMutation} from '../queries/todos';
 import TodoItem from './TodoItem';
 import {set} from 'ramda';
 
 export default function TodoList() {
   const {data: todos, isLoading, isError, error} = useTodosQuery();
+
+  const completeTodoMutation = useCompleteTodoMutation();
 
   const removeTodoMutation = useRemoveTodoMutation();
   const [pendingIds, setPendingIds] = useState<Set<string>>(new Set<string>());
@@ -13,8 +15,8 @@ export default function TodoList() {
   const completed = useMemo(() => todos?.todos.filter((t) => t.completed) ?? [], [todos]);
   const pending = useMemo(() => todos?.todos.filter((t) => !t.completed) ?? [], [todos]);
 
-  const onComplete = (id: string, isOn: boolean) => {
-    console.log(id, isOn);
+  const onComplete = (id: string, completed: boolean) => {
+    completeTodoMutation.mutate({id, completed});
   };
 
   const onRemove = (id: string) => {

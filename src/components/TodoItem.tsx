@@ -17,7 +17,6 @@ export default function TodoItem({
     <div style={{marginBottom: '10px'}}>
       <h3>{todo.title}</h3>
       <p>{todo.description}</p>
-      <p>Status: {todo.completed ? 'Completed' : 'Pending'}</p>
 
       <p>
         <label>
@@ -25,7 +24,7 @@ export default function TodoItem({
             type="checkbox"
             defaultChecked={todo.completed}
             onChange={() => completeHandler(todo.id, !todo.completed)}
-          />{' '}
+          />
           Completed
         </label>
       </p>
