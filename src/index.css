@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+
+@theme {
+  --default-font-family: 'Inter';
+
+  --color-primary: rgba(0, 17, 65, 1);
+  --color-secondary: rgba(77, 86, 103, 1);
+  --color-tertiary: rgba(122, 134, 154, 1);
+  --color-white: rgba(255, 255, 255, 1);
+  --color-danger: rgba(183, 28, 28, 1);
+
+  --color-fill-brand: rgba(15, 98, 254, 1);
+  --color-fill-brand-hover: rgba(0, 67, 206, 1);
+  --color-fill-darkBlue: rgba(0, 17, 65, 1);
+  --color-fill-gray: rgba(241, 242, 246, 1);
+  --color-fill-gray-hover: rgba(230, 232, 239, 1);
+  --color-fill-gray-lightest: rgba(241, 242, 246, 1);
+  --color-fill-white: rgba(255, 255, 255, 1);
+
+  --color-brand: rgba(15, 98, 254, 1);
+  --color-gray: rgba(202, 209, 222, 1);
+  --color-danger: rgba(227, 44, 30, 1);
+}
+
+@layer components {
+  .input-border {
+    @apply rounded-sm border border-gray outline-0 hover:border-brand focus:border-brand focus-visible:border-brand active:border-brand active:ring-4 active:ring-brand/20;
+  }
+
+  .simple-button {
+    @apply flex flex-row items-center justify-center gap-1 px-5 py-2.5 bg-fill-brand rounded-full outline-0 text-white text-sm cursor-pointer hover:bg-fill-brand-hover  focus:bg-fill-brand-hover focus-visible:bg-fill-brand-hover active:bg-fill-brand-hover;
+  }
+}
