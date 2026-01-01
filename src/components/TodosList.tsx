@@ -2,6 +2,7 @@ import {useMemo, useState} from 'react';
 
 import {useTodosQuery, useRemoveTodoMutation, useCompleteTodoMutation} from '../queries/todos';
 import TodoList from './TodoList';
+import EmptyList from './EmptyList';
 
 export default function TodosList() {
   const {data: todos, isLoading, isError, error} = useTodosQuery();
@@ -41,26 +42,28 @@ export default function TodosList() {
   }
 
   if (todos?.todos.length === 0) {
-    return <div>No todos found. Add your first todo!</div>;
+    return <EmptyList />;
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-10">
       <TodoList
-        listName="Pending Todos"
+        listName="To-do"
         todos={pending}
         pending={pendingIds}
         completeHandler={onComplete}
         removeHandler={onRemove}
       />
 
-      <TodoList
-        listName="Completed Todos"
-        todos={completed}
-        pending={pendingIds}
-        completeHandler={onComplete}
-        removeHandler={onRemove}
-      />
+      {completed.length > 0 && (
+        <TodoList
+          listName="Completed"
+          todos={completed}
+          pending={pendingIds}
+          completeHandler={onComplete}
+          removeHandler={onRemove}
+        />
+      )}
     </div>
   );
 }

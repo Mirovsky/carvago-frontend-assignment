@@ -15,6 +15,8 @@ import RegisterPage from '../pages/RegisterPage';
 import ErrorPage from '../pages/ErrorPage';
 import AddTodoPage from '../pages/AddTodoPage';
 import EditTodoPage from '../pages/EditTodoPage';
+import {registerAction} from '../actions/registerAction';
+import {loginAction} from '../actions/loginAction';
 
 export const router = createBrowserRouter([
   {
@@ -23,10 +25,12 @@ export const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginPage />,
+        action: loginAction,
       },
       {
         path: '/register',
         element: <RegisterPage />,
+        action: registerAction,
       },
       {
         path: '/error',

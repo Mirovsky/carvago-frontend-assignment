@@ -28,6 +28,14 @@
   }
 
   .simple-button {
-    @apply flex flex-row items-center justify-center gap-1 px-5 py-2.5 bg-fill-brand rounded-full outline-0 text-white text-sm cursor-pointer hover:bg-fill-brand-hover  focus:bg-fill-brand-hover focus-visible:bg-fill-brand-hover active:bg-fill-brand-hover;
+    @apply h-10 flex flex-row items-center justify-center gap-1 px-5 py-2.5  rounded-full outline-0 text-sm cursor-pointer;
+  }
+
+  .button-blue {
+    @apply bg-fill-brand text-white hover:bg-fill-brand-hover  focus:bg-fill-brand-hover focus-visible:bg-fill-brand-hover active:bg-fill-brand-hover;
+  }
+
+  .button-white {
+    @apply bg-fill-white text-fill-darkBlue hover:bg-fill-gray;
   }
 }

@@ -1,7 +1,7 @@
+import {redirect} from 'react-router';
 import {queryClient} from '../utils/queryClient';
 import {authorizedFetch} from '../api/apiFetch';
 import {API_URL} from '../api/auth';
-import {redirect} from 'react-router';
 
 export async function newTodoAction({request}: {request: Request}) {
   const data = await request.formData();

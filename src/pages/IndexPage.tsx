@@ -3,9 +3,9 @@ import TodosList from '../components/TodosList';
 
 export default function IndexPage() {
   return (
-    <div>
+    <section className="mx-auto mx-w-140 flex flex-col gap-10 p-10 rounded-3xl bg-fill-white">
       <TodoListHeader />
       <TodosList />
-    </div>
+    </section>
   );
 }
