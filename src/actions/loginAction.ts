@@ -9,12 +9,22 @@ export async function loginAction({request}: {request: Request}) {
   const username = data.get('username')?.toString();
   const password = data.get('password')?.toString();
   if (username === null || password === null) {
-    throw new Error('Failed to login an user');
+    return {
+      status: 422,
+      formError: 'Missing credentials',
+    };
   }
 
-  await authApi.login(username!, password!);
+  try {
+    await authApi.login(username!, password!);
 
-  await queryClient.invalidateQueries({queryKey: ['me']});
+    await queryClient.invalidateQueries({queryKey: ['me']});
+  } catch (e) {
+    return {
+      status: 401,
+      formError: 'Invalid credentials',
+    };
+  }
 
   throw redirect('/');
 }

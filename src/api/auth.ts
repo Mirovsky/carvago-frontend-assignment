@@ -13,12 +13,13 @@ export async function register(username: string, password: string) {
     body: JSON.stringify({username, password}),
   });
 
+  console.log(res);
+
   if (!res.ok) {
     throw new Error('Registration failed');
   }
 
   const data = (await res.json()) as {accessToken: string; refreshToken: string};
-
   tokenStore.set({access: data.accessToken, refresh: data.refreshToken});
 }
 

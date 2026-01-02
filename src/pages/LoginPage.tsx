@@ -1,9 +1,10 @@
-import {Navigate, useLocation, NavLink} from 'react-router';
+import {Navigate, useLocation, NavLink, useActionData} from 'react-router';
 
 import {useMeQuery} from '../queries/me';
 import UserForm from '../components/UserForm';
 
 export default function LoginPage() {
+  const actionData = useActionData();
   const {data: me, isLoading} = useMeQuery();
   const location = useLocation();
 
@@ -22,7 +23,7 @@ export default function LoginPage() {
         your credentials below. Your privacy is our priority.
       </p>
 
-      <UserForm actionLabel="Log in" />
+      <UserForm actionLabel="Log in" actionData={actionData} />
 
       <p className="text-sm text-secondary">
         Don't have an account yet?{' '}

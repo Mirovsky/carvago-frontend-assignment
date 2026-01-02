@@ -9,12 +9,24 @@ export async function registerAction({request}: {request: Request}) {
   const username = data.get('username')?.toString();
   const password = data.get('password')?.toString();
   if (username === null || password === null) {
-    throw new Error('Failed to register an user');
+    return {
+      status: 422,
+      formError: 'Missing data',
+    };
   }
 
-  await authApi.register(username!, password!);
+  try {
+    await authApi.register(username!, password!);
 
-  await queryClient.invalidateQueries({queryKey: ['me']});
+    await queryClient.invalidateQueries({queryKey: ['me']});
+  } catch (e) {
+    console.log(e);
+
+    return {
+      status: 401,
+      formError: 'Invalid credentials',
+    };
+  }
 
   throw redirect('/');
 }

@@ -6,12 +6,14 @@ import IconShow from '@assets/icons/icon-show.svg?react';
 import IconForward from '@assets/icons/icon-forward.svg?react';
 
 import Input from '../components/simple/Input';
+import {spawn} from 'child_process';
 
 type UserFormProps = {
   actionLabel: string;
+  actionData: any;
 };
 
-export default function UserForm({actionLabel}: UserFormProps) {
+export default function UserForm({actionLabel, actionData}: UserFormProps) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordHandler = (e: React.FormEvent) => {
@@ -44,6 +46,8 @@ export default function UserForm({actionLabel}: UserFormProps) {
       <button type="submit" className="simple-button button-blue">
         {actionLabel} <IconForward />
       </button>
+
+      {actionData && <p className="text-center text-sm text-danger">{actionData?.formError}</p>}
     </Form>
   );
 }
