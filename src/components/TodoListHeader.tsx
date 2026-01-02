@@ -2,15 +2,17 @@ import {NavLink} from 'react-router';
 
 import IconAdd from '@assets/icons/icon-add.svg?react';
 
+import {useMeQuery} from '../queries/me';
 import {useDate} from '../utils/time';
 
 export default function TodoListHeader() {
   const date = useDate();
+  const me = useMeQuery();
 
   return (
     <div className="flex flex-col justify-between gap-4 sm:flex-row">
       <div className="flex flex-col gap-2">
-        <h1 className="font-bold text-2xl">Hello Anette!</h1>
+        <h1 className="font-bold text-2xl">Hello {me.data?.username}!</h1>
         <span className="text-base text-tertiary">
           {date.toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'})}
         </span>
