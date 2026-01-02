@@ -1,7 +1,8 @@
 import {NavLink} from 'react-router';
 
 import IconCheck from '@assets/icons/icon-check.svg?react';
-import IconMore from '@assets/icons/icon-more.svg?react';
+import IconDelete from '@assets/icons/icon-delete.svg?react';
+import IconEdit from '@assets/icons/icon-edit.svg?react';
 
 import {Todo} from '../queries/todos';
 import {Menu} from './simple/Menu';
@@ -19,8 +20,8 @@ export default function TodoItem({
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <div className="relative w-full flex flex-row">
-        <label className="group h-10 flex flex-1 cursor-pointer">
+      <div className="relative w-full flex flex-row justify-between">
+        <label className="group h-10 flex cursor-pointer">
           <input
             type="checkbox"
             name=""
@@ -39,41 +40,23 @@ export default function TodoItem({
         </label>
 
         <div className="w-10 h-10">
-          <NavLink to={`/todo/${todo.id}`}>Edit</NavLink>
-          <button onClick={() => removeHandler(todo.id)} disabled={isPending}>
-            Remove
-          </button>
           <Menu>
-            <div>asdf</div>
-            <div>asdf</div>
+            <NavLink role="menuitem" className="menu-button" to={`/todo/${todo.id}`}>
+              <IconEdit /> Edit
+            </NavLink>
+
+            <button
+              className="menu-button text-danger"
+              onClick={() => removeHandler(todo.id)}
+              disabled={isPending}
+              role="menuitem"
+            >
+              <IconDelete /> Delete
+            </button>
           </Menu>
-          {/*<button className="w-10 h-10 px-0 simple-button button-white">
-            <IconMore />
-          </button>*/}
         </div>
       </div>
       <p className="pl-12 text-base text-tertiary">{todo.description}</p>
-
-      {/*<input
-          className="peer appearance-none"
-          type="checkbox"
-          defaultChecked={todo.completed}
-          onChange={() => completeHandler(todo.id, !todo.completed)}
-        />
-        <div className="w-8 h-8 border-2 border-gray rounded-full">
-          <div className="none peer:checked:block">
-            <IconCheck />
-          </div>
-        </div>
-      </div>
-      <div>
-        <h3>{todo.title}</h3>
-        <p>{todo.description}</p>
-
-         <NavLink to={`/todo/${todo.id}`}>Edit</NavLink>
-        <button onClick={() => removeHandler(todo.id)} disabled={isPending}>
-          Remove
-        </button> */}
     </div>
   );
 }
