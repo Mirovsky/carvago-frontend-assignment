@@ -6,6 +6,7 @@ import {todoLoader} from '../loaders/todoLoader';
 import {newTodoAction} from '../actions/newTodoAction';
 import {editTodoAction} from '../actions/editTodoAction';
 
+import ErrorBoundary from '../components/ErrorBoundary';
 import UnauthorizedLayout from '../components/layouts/UnauthorizedLayout';
 import AuthorizedLayout from '../components/layouts/AuthorizedLayout';
 
@@ -19,8 +20,10 @@ import {registerAction} from '../actions/registerAction';
 import {loginAction} from '../actions/loginAction';
 
 export const router = createBrowserRouter([
+  {path: '/error', element: <ErrorPage />},
   {
     element: <UnauthorizedLayout />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: '/login',
@@ -40,6 +43,7 @@ export const router = createBrowserRouter([
   },
   {
     element: <AuthorizedLayout />,
+    errorElement: <ErrorBoundary />,
     loader: requireAuthLoader,
     children: [
       {
@@ -58,9 +62,5 @@ export const router = createBrowserRouter([
         element: <EditTodoPage />,
       },
     ],
-  },
-  {
-    path: '*',
-    element: <Navigate to="/error" replace />,
   },
 ]);
