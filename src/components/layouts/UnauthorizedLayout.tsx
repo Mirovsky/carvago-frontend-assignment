@@ -3,7 +3,7 @@ import UnauthorizedHeader from '../UnauthorizedHeader';
 
 export default function UnauthorizedLayout() {
   return (
-    <main className="container mx-auto">
+    <main className="px-2 pb-2 container mx-auto">
       <UnauthorizedHeader />
 
       <Outlet />

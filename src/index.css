@@ -14,6 +14,7 @@
   --color-fill-darkBlue: rgba(0, 17, 65, 1);
   --color-fill-gray: rgba(241, 242, 246, 1);
   --color-fill-gray-hover: rgba(230, 232, 239, 1);
+  --color-fill-gray-focus: rgba(230, 230, 232, 1);
   --color-fill-gray-lightest: rgba(241, 242, 246, 1);
   --color-fill-white: rgba(255, 255, 255, 1);
 
@@ -23,6 +24,10 @@
 }
 
 @layer components {
+  .container-box {
+    @apply mx-auto max-w-7xl flex flex-col gap-10 p-10 rounded-3xl bg-fill-white;
+  }
+
   .input-border {
     @apply rounded-sm border border-gray outline-0 hover:border-brand focus:border-brand focus-visible:border-brand active:border-brand active:ring-4 active:ring-brand/20;
   }
@@ -36,7 +41,11 @@
   }
 
   .button-white {
-    @apply bg-fill-white text-fill-darkBlue hover:bg-fill-gray;
+    @apply bg-fill-white text-fill-darkBlue hover:bg-fill-gray focus:bg-fill-gray-focus active:bg-fill-gray-focus;
+  }
+
+  .button-gray {
+    @apply bg-fill-gray text-fill-darkBlue hover:bg-fill-gray-hover focus:bg-fill-gray-focus active:bg-fill-gray-focus;
   }
 
   .menu-button {

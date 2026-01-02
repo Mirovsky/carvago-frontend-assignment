@@ -9,6 +9,11 @@ export async function editTodoAction({request}: {request: Request}) {
 
   const data = await request.formData();
 
+  const intent = data.get('intent');
+  if (intent === 'reset') {
+    throw redirect('/');
+  }
+
   const res = await authorizedFetch(`${API_URL}/todo/${id}`, {
     method: 'PUT',
     headers: {

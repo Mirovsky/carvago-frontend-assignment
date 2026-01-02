@@ -3,7 +3,7 @@ import AuthorizedHeader from '../AuthorizedHeader';
 
 export default function AuthorizedLayout() {
   return (
-    <main className="container mx-auto">
+    <main className="px-2 container mx-auto">
       <AuthorizedHeader />
 
       <Outlet />

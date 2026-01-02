@@ -8,7 +8,7 @@ export default function TodoListHeader() {
   const date = useDate();
 
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-col justify-between gap-4 sm:flex-row">
       <div className="flex flex-col gap-2">
         <h1 className="font-bold text-2xl">Hello Anette!</h1>
         <span className="text-base text-tertiary">
